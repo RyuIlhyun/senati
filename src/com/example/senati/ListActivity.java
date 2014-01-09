@@ -45,6 +45,21 @@ public class ListActivity extends Activity {
 		select();
 		adapter = new MyAdapter(ListActivity.this, al, R.layout.list_row);
 		
+		
+				/*
+				if(adapter.getCount()<10) {
+					helper.insert(helper, "鼻", "nose", "코", "はな", "び");
+					helper.insert(helper, "足", "leg", "다리", "あし", "そく");
+					helper.insert(helper, "腕", "arm", "팔", "うで", "わん");
+					helper.insert(helper, "指", "finger", "손가락", "ゆび", "し");
+					helper.insert(helper, "胸", "chest", "가슴", "むね", "きょう");
+					helper.insert(helper, "首", "neck", "목", "くび", "しゅ");
+					helper.insert(helper, "腹", "stomach", "배", "はら", "ふく");
+					helper.insert(helper, "目", "eye", "눈", "め", "もく、ぼく");
+				}
+				*/
+
+		
 		list_view.setAdapter(adapter);
 	}
 
