@@ -30,14 +30,6 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/header_list_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/header_list"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
                 android:id="@+id/header_set_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -2,6 +2,7 @@ package com.example.senati;
 
 import java.util.ArrayList;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -11,14 +12,24 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+
 
 public class DetailActivity extends Activity {
 
 	MySQLiteOpenHelper helper;
 	SQLiteDatabase db;
 	
+	ImageButton btn;
 	TextView text;
+	WebView wView;
+	WebSettings wSettings;
 	MyAdapter adapter;
 	ArrayList<TWord> al = new ArrayList<TWord>();
 	
@@ -29,9 +40,7 @@ public class DetailActivity extends Activity {
 		
 		text = (TextView)findViewById(R.id.header_home_btn);
 		text.setOnClickListener(mHomeListener);
-		
-		text = (TextView)findViewById(R.id.header_list_btn);
-		text.setOnClickListener(mListListener);
+		//text.setText("text");
 		
 		text = (TextView)findViewById(R.id.header_set_btn);
 		text.setOnClickListener(mSetListener);
@@ -40,7 +49,31 @@ public class DetailActivity extends Activity {
 		al.clear();
 		select();
 		//adapter = new MyAdapter(ListActivity.this, al, R.layout.list_row);
+		
+		TWord tw = al.get(1);
+		
+		text = (TextView)findViewById(R.id.textView1);
+		text.setText(tw.name_e);
+		
+		text = (TextView)findViewById(R.id.textView2);
+		text.setText(tw.detail_e);
+		
+		btn = (ImageButton)findViewById(R.id.imageButton1);
+		btn.setOnClickListener(mPlayListener);
+		
+		text = (TextView)findViewById(R.id.textView3);
+		text.setText("음원파일:민중서림 엣센스 일본어사전");
+		
+		wView = (WebView)findViewById(R.id.webView1);
+		wView.setWebChromeClient(new WebChromeClient());
+		wView.setWebViewClient(new WebViewClient());
+		wSettings = wView.getSettings();
+		wSettings.setBuiltInZoomControls(true);
+		
+		wView.loadUrl("http://www.google.com/search?q=" + tw.name_e + "&tbm=isch");
+		
 	}
+	
 	
 	private void select() {
 		db = helper.getReadableDatabase();
@@ -98,7 +131,9 @@ public class DetailActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			
+			Intent intent = new Intent();
+			intent.setClass(DetailActivity.this, ListActivity.class);
+			startActivity(intent);
 		}
 		
 	};
@@ -113,5 +148,17 @@ public class DetailActivity extends Activity {
 		
 	};
 	
+	View.OnClickListener mPlayListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			MediaPlayer mPlayer;
+			
+			mPlayer = MediaPlayer.create(DetailActivity.this, R.raw.hand);
+			mPlayer.start();			
+		}
+		
+	};
 
 }
