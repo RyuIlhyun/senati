@@ -16,7 +16,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -38,6 +37,11 @@ public class DetailActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail);
 		
+		//Log.d("ih_test", "start Detail");
+		
+		Intent intent = getIntent();
+		int wID = intent.getIntExtra("wID", 0); 
+		
 		text = (TextView)findViewById(R.id.header_home_btn);
 		text.setOnClickListener(mHomeListener);
 		//text.setText("text");
@@ -49,8 +53,8 @@ public class DetailActivity extends Activity {
 		al.clear();
 		select();
 		//adapter = new MyAdapter(ListActivity.this, al, R.layout.list_row);
-		
-		TWord tw = al.get(1);
+		//Log.d("ih_test", Integer.toString(wID));
+		TWord tw = al.get(wID);
 		
 		text = (TextView)findViewById(R.id.textView1);
 		text.setText(tw.name_e);
@@ -60,6 +64,12 @@ public class DetailActivity extends Activity {
 		
 		btn = (ImageButton)findViewById(R.id.imageButton1);
 		btn.setOnClickListener(mPlayListener);
+		
+		btn = (ImageButton)findViewById(R.id.imageButton2);
+		btn.setOnClickListener(mBeforeListener);
+		
+		btn = (ImageButton)findViewById(R.id.imageButton3);
+		btn.setOnClickListener(mNextListener);
 		
 		text = (TextView)findViewById(R.id.textView3);
 		text.setText("음원파일:민중서림 엣센스 일본어사전");
@@ -157,6 +167,32 @@ public class DetailActivity extends Activity {
 			
 			mPlayer = MediaPlayer.create(DetailActivity.this, R.raw.hand);
 			mPlayer.start();			
+		}
+		
+	};
+	
+	View.OnClickListener mBeforeListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			Intent intent = new Intent();
+			intent.setClass(DetailActivity.this, DetailActivity.class);
+			intent.putExtra("wID", 0);
+			startActivity(intent);			
+		}
+		
+	};
+	
+	View.OnClickListener mNextListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			Intent intent = new Intent();
+			intent.setClass(DetailActivity.this, DetailActivity.class);
+			intent.putExtra("wID", 1);
+			startActivity(intent);			
 		}
 		
 	};
