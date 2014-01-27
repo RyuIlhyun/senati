@@ -25,24 +25,12 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:id="@+id/header_home_btn"
-                android:layout_weight="1"
-                android:layout_width="fill_parent" 
-    			android:layout_height="fill_parent" 
-    			android:gravity="center"
-                android:text="@string/header_home"
-                android:layout_gravity="center"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Large Text"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <TextView
-                android:id="@+id/header_set_btn"
-                android:layout_weight="1"
-                android:layout_width="fill_parent" 
-    			android:layout_height="fill_parent" 
-    			android:gravity="center"
-                android:layout_gravity="center"
-                android:text="@string/header_set"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
         </TableRow>
     </TableLayout>
 
@@ -53,22 +41,16 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="12dp" >
 
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/btn_star" />
+
         <TableRow
             android:id="@+id/tableRow5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-
-            <ImageButton
-                android:id="@+id/imageButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_media_previous" />
-
-            <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_media_next" />
         </TableRow>
     </TableLayout>
 
@@ -76,7 +58,6 @@
         android:id="@+id/scrollView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/tableLayout2"
         android:layout_alignLeft="@+id/tableLayout1"
         android:layout_alignRight="@+id/tableLayout1"
         android:layout_below="@+id/tableLayout1"
@@ -105,12 +86,6 @@
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_lock_silent_mode_off" />
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-
             <WebView
                 android:id="@+id/webView1"
                 android:layout_width="match_parent"
@@ -118,5 +93,22 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/scrollView1"
+        android:layout_alignTop="@+id/imageButton2"
+        android:src="@android:drawable/ic_media_next" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tableLayout2"
+        android:layout_marginRight="11dp"
+        android:layout_toLeftOf="@+id/imageButton3"
+        android:src="@android:drawable/ic_media_previous" />
 
 </RelativeLayout>

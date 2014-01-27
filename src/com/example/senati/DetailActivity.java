@@ -42,12 +42,12 @@ public class DetailActivity extends Activity {
 		Intent intent = getIntent();
 		int wID = intent.getIntExtra("wID", 0); 
 		
-		text = (TextView)findViewById(R.id.header_home_btn);
-		text.setOnClickListener(mHomeListener);
+		//text = (TextView)findViewById(R.id.header_home_btn);
+		//text.setOnClickListener(mHomeListener);
 		//text.setText("text");
 		
-		text = (TextView)findViewById(R.id.header_set_btn);
-		text.setOnClickListener(mSetListener);
+		//text = (TextView)findViewById(R.id.header_set_btn);
+		//text.setOnClickListener(mSetListener);
 		
 		helper = new MySQLiteOpenHelper(DetailActivity.this, "basic_jwords.db", null, 1);
 		al.clear();
@@ -55,6 +55,9 @@ public class DetailActivity extends Activity {
 		//adapter = new MyAdapter(ListActivity.this, al, R.layout.list_row);
 		//Log.d("ih_test", Integer.toString(wID));
 		TWord tw = al.get(wID);
+		
+		text = (TextView)findViewById(R.id.textView4);
+		text.setText(tw.name_j);
 		
 		text = (TextView)findViewById(R.id.textView1);
 		text.setText(tw.name_e);
@@ -71,8 +74,11 @@ public class DetailActivity extends Activity {
 		btn = (ImageButton)findViewById(R.id.imageButton3);
 		btn.setOnClickListener(mNextListener);
 		
-		text = (TextView)findViewById(R.id.textView3);
-		text.setText("음원파일:민중서림 엣센스 일본어사전");
+		btn = (ImageButton)findViewById(R.id.imageButton4);
+		btn.setOnClickListener(mHomeListener);
+		
+		//text = (TextView)findViewById(R.id.textView3);
+		//text.setText("음원파일:민중서림 엣센스 일본어사전");
 		
 		wView = (WebView)findViewById(R.id.webView1);
 		wView.setWebChromeClient(new WebChromeClient());
