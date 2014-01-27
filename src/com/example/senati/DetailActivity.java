@@ -1,6 +1,8 @@
 package com.example.senati;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -30,17 +32,19 @@ public class DetailActivity extends Activity {
 	WebView wView;
 	WebSettings wSettings;
 	MyAdapter adapter;
-	ArrayList<TWord> al = new ArrayList<TWord>();
+	ArrayList<TWord> al;
+	int wID;
+	TWord tw;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_detail);
+		setContentView(R.layout.activity_detail_2);
 		
 		//Log.d("ih_test", "start Detail");
 		
 		Intent intent = getIntent();
-		int wID = intent.getIntExtra("wID", 0); 
+		wID = intent.getIntExtra("wID", 0); 
 		
 		//text = (TextView)findViewById(R.id.header_home_btn);
 		//text.setOnClickListener(mHomeListener);
@@ -50,31 +54,29 @@ public class DetailActivity extends Activity {
 		//text.setOnClickListener(mSetListener);
 		
 		helper = new MySQLiteOpenHelper(DetailActivity.this, "basic_jwords.db", null, 1);
-		al.clear();
-		select();
-		//adapter = new MyAdapter(ListActivity.this, al, R.layout.list_row);
-		//Log.d("ih_test", Integer.toString(wID));
-		TWord tw = al.get(wID);
 		
-		text = (TextView)findViewById(R.id.textView4);
-		text.setText(tw.name_j);
+		select();
+		tw = al.get(wID);
 		
 		text = (TextView)findViewById(R.id.textView1);
-		text.setText(tw.name_e);
+		text.setText(tw.name_j);
 		
 		text = (TextView)findViewById(R.id.textView2);
+		text.setText(tw.name_e);
+		
+		text = (TextView)findViewById(R.id.textView3);
 		text.setText(tw.detail_e);
 		
-		btn = (ImageButton)findViewById(R.id.imageButton1);
+		btn = (ImageButton)findViewById(R.id.imageButton4);
 		btn.setOnClickListener(mPlayListener);
 		
 		btn = (ImageButton)findViewById(R.id.imageButton2);
 		btn.setOnClickListener(mBeforeListener);
 		
-		btn = (ImageButton)findViewById(R.id.imageButton3);
+		btn = (ImageButton)findViewById(R.id.imageButton1);
 		btn.setOnClickListener(mNextListener);
 		
-		btn = (ImageButton)findViewById(R.id.imageButton4);
+		btn = (ImageButton)findViewById(R.id.imageButton3);
 		btn.setOnClickListener(mHomeListener);
 		
 		//text = (TextView)findViewById(R.id.textView3);
@@ -92,6 +94,8 @@ public class DetailActivity extends Activity {
 	
 	
 	private void select() {
+		
+		al = new ArrayList<TWord>();
 		db = helper.getReadableDatabase();
 		Cursor c = db.query("t_word", null, null, null, null, null, null);
 		
@@ -116,8 +120,10 @@ public class DetailActivity extends Activity {
 			tw.detail_k = detail_k;
 			tw.flg1 = flg1;
 			tw.flg2 = flg2;
-			al.add(tw);			
+			al.add(tw);
 		}
+		
+		Collections.shuffle(al);
 		
 		c.close();
 		db.close();
@@ -135,6 +141,8 @@ public class DetailActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
+			al.clear();
+			
 			Intent intent = new Intent();
 			intent.setClass(DetailActivity.this, MainActivity.class);
 			startActivity(intent);
@@ -150,16 +158,6 @@ public class DetailActivity extends Activity {
 			Intent intent = new Intent();
 			intent.setClass(DetailActivity.this, ListActivity.class);
 			startActivity(intent);
-		}
-		
-	};
-	
-	View.OnClickListener mSetListener = new OnClickListener() {
-
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			
 		}
 		
 	};
@@ -182,10 +180,27 @@ public class DetailActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
+			/*
 			Intent intent = new Intent();
 			intent.setClass(DetailActivity.this, DetailActivity.class);
-			intent.putExtra("wID", 0);
-			startActivity(intent);			
+			Log.d("ih_before", Integer.toString(wID));
+			intent.putExtra("wID", wID - 1);
+			startActivity(intent);
+			*/
+			Log.d("ih_next", Integer.toString(wID));
+			wID = wID - 1;
+			tw = al.get(wID);
+			
+			text = (TextView)findViewById(R.id.textView1);
+			text.setText(tw.name_j);
+			
+			text = (TextView)findViewById(R.id.textView2);
+			text.setText(tw.name_e);
+			
+			text = (TextView)findViewById(R.id.textView3);
+			text.setText(tw.detail_e);
+			
+			wView.loadUrl("http://www.google.com/search?q=" + tw.name_e + "&tbm=isch");
 		}
 		
 	};
@@ -195,10 +210,52 @@ public class DetailActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
+			/*
 			Intent intent = new Intent();
 			intent.setClass(DetailActivity.this, DetailActivity.class);
-			intent.putExtra("wID", 1);
-			startActivity(intent);			
+			Log.d("ih_next", Integer.toString(wID));
+			intent.putExtra("wID", wID + 1);
+			startActivity(intent);
+			*/	
+			Log.d("ih_next", Integer.toString(wID));
+			wID = wID + 1;
+			tw = al.get(wID);
+			
+			text = (TextView)findViewById(R.id.textView1);
+			text.setText(tw.name_j);
+			
+			text = (TextView)findViewById(R.id.textView2);
+			text.setText(tw.name_e);
+			
+			text = (TextView)findViewById(R.id.textView3);
+			text.setText(tw.detail_e);
+			
+			/*
+			btn = (ImageButton)findViewById(R.id.imageButton4);
+			btn.setOnClickListener(mPlayListener);
+			
+			btn = (ImageButton)findViewById(R.id.imageButton2);
+			btn.setOnClickListener(mBeforeListener);
+			
+			btn = (ImageButton)findViewById(R.id.imageButton1);
+			btn.setOnClickListener(mNextListener);
+			
+			btn = (ImageButton)findViewById(R.id.imageButton3);
+			btn.setOnClickListener(mHomeListener);
+			
+			//text = (TextView)findViewById(R.id.textView3);
+			//text.setText("음원파일:민중서림 엣센스 일본어사전");
+
+			 
+			
+			wView = (WebView)findViewById(R.id.webView1);
+			wView.setWebChromeClient(new WebChromeClient());
+			wView.setWebViewClient(new WebViewClient());
+			wSettings = wView.getSettings();
+			wSettings.setBuiltInZoomControls(true);
+			*/
+			
+			wView.loadUrl("http://www.google.com/search?q=" + tw.name_e + "&tbm=isch");
 		}
 		
 	};
