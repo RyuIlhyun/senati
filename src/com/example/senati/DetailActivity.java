@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
+
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
@@ -19,6 +23,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 
@@ -40,6 +46,31 @@ public class DetailActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail_2);
+		
+		//AdView adView = (AdView)this.findViewById(R.id.ad2);
+		//adView.loadAd(new AdRequest());
+		
+		
+		// Create the adView
+	    AdView adView = new AdView(this, AdSize.BANNER, "a1530ea42bc175b");
+
+	    // Lookup your LinearLayout assuming it's been given
+	    // the attribute android:id="@+id/mainLayout"
+
+	    RelativeLayout layout = (RelativeLayout)findViewById(R.id.adwrap);
+
+	    // Add the adView to it
+	    layout.addView(adView);
+	    
+	    // Create an ad request. Check logcat output for the hashed device ID to
+	    // get test ads on a physical device.
+	    AdRequest adRequest = new AdRequest();
+	    adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
+
+	    // Initiate a generic request to load it with an ad
+	    adView.loadAd(new AdRequest());
+	    
+		
 		
 		//Log.d("ih_test", "start Detail");
 		
@@ -189,6 +220,7 @@ public class DetailActivity extends Activity {
 			*/
 			Log.d("ih_next", Integer.toString(wID));
 			wID = wID - 1;
+			if(wID == -1) wID = al.size()-1;
 			tw = al.get(wID);
 			
 			text = (TextView)findViewById(R.id.textView1);
@@ -219,6 +251,7 @@ public class DetailActivity extends Activity {
 			*/	
 			Log.d("ih_next", Integer.toString(wID));
 			wID = wID + 1;
+			if(wID>(al.size()-1)) wID = 0;
 			tw = al.get(wID);
 			
 			text = (TextView)findViewById(R.id.textView1);

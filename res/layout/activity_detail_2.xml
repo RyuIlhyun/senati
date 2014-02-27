@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/lib/com.google.ads"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -61,10 +62,8 @@
                         android:id="@+id/webView1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
-
                 </LinearLayout>
             </ScrollView>
-
         </LinearLayout>
 
     </RelativeLayout>
@@ -97,7 +96,13 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:src="@android:drawable/ic_menu_myplaces" />
-
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/adwrap"
+        android:layout_width="fill_parent"
+        android:layout_height="52dp" >
+		
+    </RelativeLayout>
+	
 </LinearLayout>
