@@ -29,10 +29,14 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 		String sql = "create table t_word (" + 
 				"_id integer primary key autoincrement, " + 
 				"name_j string, " +
+				"pron string, " +
+				"read string, " +
 				"name_e string, " +
 				"name_k string, " +
-				"detail_e string, " +
-				"detail_k string, " +
+				"cate_j string, " +
+				"cate_e string, " +
+				"cate_k string, " +
+				"level integer, " +
 				"flg1 integer, " +
 				"flg2 integer);";
 		
@@ -50,19 +54,28 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 	}
 	
 	public void insert(MySQLiteOpenHelper helper, 
-					   String name_j, 
+					   String name_j,
+					   String pron,
+					   String read,
 					   String name_e, 
 					   String name_k,
-					   String detail_e, 
-					   String detail_k) {
+					   int level,
+					   String cate_j,
+					   String cate_e,
+					   String cate_k
+					   ) {
 		db = helper.getWritableDatabase();
 		
 		ContentValues values = new ContentValues();
 		values.put("name_j", name_j);
+		values.put("pron", pron);
+		values.put("read", read);
 		values.put("name_e", name_e);
 		values.put("name_k", name_k);
-		values.put("detail_e", detail_e);
-		values.put("detail_k", detail_k);
+		values.put("cate_j", cate_j);
+		values.put("cate_e", cate_e);
+		values.put("cate_k", cate_k);
+		values.put("level", level);
 		values.put("flg1", 0);
 		values.put("flg2", 0);
 		db.insert("t_word", null, values);

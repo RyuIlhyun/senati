@@ -84,22 +84,28 @@ public class DetailActivity extends Activity {
 		//text = (TextView)findViewById(R.id.header_set_btn);
 		//text.setOnClickListener(mSetListener);
 		
-		helper = new MySQLiteOpenHelper(DetailActivity.this, "basic_jwords.db", null, 1);
+		helper = new MySQLiteOpenHelper(DetailActivity.this, "basic_jwords_1.db", null, 1);
 		
 		select();
+		
+		if (al.isEmpty()) return;
+		
 		tw = al.get(wID);
 		
 		text = (TextView)findViewById(R.id.textView1);
 		text.setText(tw.name_j);
 		
 		text = (TextView)findViewById(R.id.textView2);
-		text.setText(tw.name_e);
+		text.setText("음독:  " + tw.pron);
 		
 		text = (TextView)findViewById(R.id.textView3);
-		text.setText(tw.detail_e);
+		text.setText("훈독:  " + tw.read);
 		
-		btn = (ImageButton)findViewById(R.id.imageButton4);
-		btn.setOnClickListener(mPlayListener);
+		text = (TextView)findViewById(R.id.textView4);
+		text.setText("뜻:     " + tw.name_k);
+		
+		//btn = (ImageButton)findViewById(R.id.imageButton4);
+		//btn.setOnClickListener(mPlayListener);
 		
 		btn = (ImageButton)findViewById(R.id.imageButton2);
 		btn.setOnClickListener(mBeforeListener);
@@ -133,22 +139,30 @@ public class DetailActivity extends Activity {
 		while (c.moveToNext()){
 			int _id = c.getInt(c.getColumnIndex("_id"));
 			String name_j = c.getString(c.getColumnIndex("name_j"));
+			String pron = c.getString(c.getColumnIndex("pron"));
+			String read = c.getString(c.getColumnIndex("read"));
 			String name_e = c.getString(c.getColumnIndex("name_e"));
 			String name_k = c.getString(c.getColumnIndex("name_k"));
-			String detail_e = c.getString(c.getColumnIndex("detail_e"));
-			String detail_k = c.getString(c.getColumnIndex("detail_k"));
+			int level = c.getInt(c.getColumnIndex("level"));
+			String cate_j = c.getString(c.getColumnIndex("cate_j"));
+			String cate_e = c.getString(c.getColumnIndex("cate_e"));
+			String cate_k = c.getString(c.getColumnIndex("cate_k"));
 			int flg1 = c.getInt(c.getColumnIndex("flg1"));
 			int flg2 = c.getInt(c.getColumnIndex("flg2"));
 			
-			Log.d("DB", _id + "/" + name_j + "/" + name_e + "/" + name_k + "/" + detail_e + "/" + detail_k + "/" + flg1 + "/" + flg2);
+			Log.d("DB", _id + "/" + name_j + "/" + name_e + "/" + name_k + "/" + pron + "/" + read + "/" + flg1 + "/" + flg2);
 			
 			TWord tw = new TWord();
 			tw._id = _id;
 			tw.name_j = name_j;
+			tw.pron = pron;
+			tw.read = read;
 			tw.name_e = name_e;
 			tw.name_k = name_k;
-			tw.detail_e = detail_e;
-			tw.detail_k = detail_k;
+			tw.level = level;
+			tw.cate_j = cate_j;
+			tw.cate_e = cate_e;
+			tw.cate_k = cate_k;
 			tw.flg1 = flg1;
 			tw.flg2 = flg2;
 			al.add(tw);
@@ -227,10 +241,13 @@ public class DetailActivity extends Activity {
 			text.setText(tw.name_j);
 			
 			text = (TextView)findViewById(R.id.textView2);
-			text.setText(tw.name_e);
+			text.setText("음독:  " + tw.pron);
 			
 			text = (TextView)findViewById(R.id.textView3);
-			text.setText(tw.detail_e);
+			text.setText("훈독:  " + tw.read);
+			
+			text = (TextView)findViewById(R.id.textView4);
+			text.setText("뜻:     " + tw.name_k);
 			
 			wView.loadUrl("http://www.google.com/search?q=" + tw.name_e + "&tbm=isch");
 		}
@@ -258,10 +275,13 @@ public class DetailActivity extends Activity {
 			text.setText(tw.name_j);
 			
 			text = (TextView)findViewById(R.id.textView2);
-			text.setText(tw.name_e);
+			text.setText("음독:  " + tw.pron);
 			
 			text = (TextView)findViewById(R.id.textView3);
-			text.setText(tw.detail_e);
+			text.setText("훈독:  " + tw.read);
+			
+			text = (TextView)findViewById(R.id.textView4);
+			text.setText("뜻:     " + tw.name_k);
 			
 			/*
 			btn = (ImageButton)findViewById(R.id.imageButton4);
