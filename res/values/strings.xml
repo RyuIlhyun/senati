@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">초등 1학년 필수한자 80</string>
+    <string name="app_name">초등 1학년 필수한자80</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="main_list_btn">LIST</string>
